@@ -1,0 +1,55 @@
+use student;
+
+CREATE table student (student_id INT PRIMARY KEY,
+    student_name VARCHAR(100) NOT NULL,
+    date_of_birth DATE NOT NULL,
+    gender CHAR(1) NOT NULL,
+    contact_number VARCHAR(15), 
+    email VARCHAR(100) ,
+    address TEXT NOT NULL,
+    joining_date DATE NOT NULL CHECK (joining_date >= '1900-01-01'),
+    roomid INT
+    );
+    alter table student add status  ENUM('active', 'inactive', 'graduated') DEFAULT 'active';
+    
+insert into student values(1,'pranshu','1999-08-02','m','935869456','pranshusingh@gmail.com','varanasi','2024-08-01','92');
+insert into student values(2,'rajesh','1999-5-12','m','895469756','ghtfhi@gmail.com','siddip','2024-05-03','1','graduayed');
+select * from student;
+update student set email='-' where student_id=1;
+insert into student values(2,'rajesh','1999-5-12','m','895469756','ghtfhi@gmail.com','siddip','2024-05-03','1','graduayed');
+
+
+
+CREATE TABLE shirts (
+    name VARCHAR(10),
+    size ENUM('x-small', 'small', 'medium', 'large')
+);
+
+insert into shirts values('polo','small');
+insert into shirts values('usp','x-small');
+insert into shirts values('allen','x-xsmall');
+insert into shirts values('usp assn','large');
+
+
+
+create table hostels(
+Hostel_id int Primary key,
+Hostel_Name varchar(20) unique key not null,
+Location varchar(20) not null,
+Total_Rooms int check(Total_Rooms>0),
+Warden_Name  varchar(25)	
+);
+
+
+
+
+create table staff(
+staff_id INt primary key,
+Staff_Name int not null,
+Role  Varchar(25),
+Contact_Number int ,
+Email Varchar(25) unique key ,
+Hostel_Id int ,
+constraint staff_fk foreign key(Hostel_Id)  references hostels(Hostel_Id) 
+ON DELETE CASCADE 
+);
